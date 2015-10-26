@@ -7,6 +7,9 @@
 
 [![NPM](https://nodei.co/npm/mongoosastic.png)](https://nodei.co/npm/mongoosastic/)
 
+
+This is a fork of Mongoosastic that enables you to pass a 'parentKey' as an option to the mongoosastic plugin so that [parent->children](https://www.elastic.co/guide/en/elasticsearch/guide/current/indexing-parent-child.html) are possible.
+
 Mongoosastic is a [mongoose](http://mongoosejs.com/) plugin that can automatically index your models into [elasticsearch](http://www.elasticsearch.org/).
 
 - [Installation](#installation)
@@ -29,13 +32,13 @@ Mongoosastic is a [mongoose](http://mongoosejs.com/) plugin that can automatical
 
 ## Installation
 
-The latest version of this package will be as close as possible to the latest `elasticsearch` and `mongoose` packages. If you are working with latest mongoose package, install normally: 
+The latest version of this package will be as close as possible to the latest `elasticsearch` and `mongoose` packages. If you are working with latest mongoose package, install normally:
 
 ```bash
 npm install -S mongoosastic
 ```
 
-If you are working with `mongoose@3.8.x` use `mongoosastic@2.x` and install a specific version: 
+If you are working with `mongoose@3.8.x` use `mongoosastic@2.x` and install a specific version:
 
 ```bash
 npm install -S mongoosastic@^2.x
@@ -77,15 +80,15 @@ var User = new Schema({
 User.plugin(mongoosastic)
 ```
 
-This will by default simply use the pluralization of the model name as the index 
+This will by default simply use the pluralization of the model name as the index
 while using the model name itself as the type. So if you create a new
 User object and save it, you can see it by navigating to
 http://localhost:9200/users/user/_search (this assumes Elasticsearch is
-running locally on port 9200). 
+running locally on port 9200).
 
 The default behavior is all fields get indexed into Elasticsearch. This can be a little wasteful especially considering that
 the document is now just being duplicated between mongodb and
-Elasticsearch so you should consider opting to index only certain fields by specifying `es_indexed` on the 
+Elasticsearch so you should consider opting to index only certain fields by specifying `es_indexed` on the
 fields you want to store:
 
 
@@ -116,7 +119,7 @@ User.search({
 
 ```
 
-To connect to more than one host, you can use an array of hosts. 
+To connect to more than one host, you can use an array of hosts.
 
 ```javascript
 MyModel.plugin(mongoosastic, {
@@ -140,8 +143,8 @@ MyModel.plugin(mongoosastic, {
 ## Indexing
 
 ### Saving a document
-The indexing takes place after saving inside the mongodb and is a defered process. 
-One can check the end of the indexion catching es-indexed event. 
+The indexing takes place after saving inside the mongodb and is a defered process.
+One can check the end of the indexion catching es-indexed event.
 
 ```javascript
 doc.save(function(err){
@@ -180,7 +183,7 @@ User.plugin(mongoosastic)
 ### Indexing An Existing Collection
 Already have a mongodb collection that you'd like to index using this
 plugin? No problem! Simply call the synchronize method on your model to
-open a mongoose stream and start indexing documents individually. 
+open a mongoose stream and start indexing documents individually.
 
 ```javascript
 var BookSchema = new Schema({
@@ -211,7 +214,7 @@ var stream = Book.synchronize({author: 'Arthur C. Clarke'})
 
 ### Bulk Indexing
 
-You can also specify `bulk` options with mongoose which will utilize Elasticsearch's bulk indexing api. This will cause the `synchronize` function to use bulk indexing as well. 
+You can also specify `bulk` options with mongoose which will utilize Elasticsearch's bulk indexing api. This will cause the `synchronize` function to use bulk indexing as well.
 
 Mongoosastic will wait 1 second (or specified delay) until it has 1000 docs (or specified size) and then perform bulk indexing.
 
@@ -279,7 +282,7 @@ GarbageModel.esTruncate(function(err){...});
 ## Mapping
 
 Schemas can be configured to have special options per field. These match
-with the existing [field mapping configurations](http://www.elasticsearch.org/guide/reference/mapping/core-types.html) defined by Elasticsearch with the only difference being they are all prefixed by "es_". 
+with the existing [field mapping configurations](http://www.elasticsearch.org/guide/reference/mapping/core-types.html) defined by Elasticsearch with the only difference being they are all prefixed by "es_".
 
 So for example. If you wanted to index a book model and have the boost
 for title set to 2.0 (giving it greater priority when searching) you'd
@@ -289,8 +292,8 @@ define it as follows:
 var BookSchema = new Schema({
     title: {type:String, es_boost:2.0}
   , author: {type:String, es_null_value:"Unknown Author"}
-  , publicationDate: {type:Date, es_type:'date'} 
-}); 
+  , publicationDate: {type:Date, es_type:'date'}
+});
 
 ```
 This example uses a few other mapping fields... such as null_value and
@@ -313,13 +316,13 @@ var ExampleSchema = new Schema({
   // Array type
   array: {type:Array, es_type:'string'},
 
-  // Object type 
+  // Object type
   object: {
     field1: {type: String},
     field2: {type: String}
   },
 
-  // Nested type 
+  // Nested type
   nested: [SubSchema],
 
   // Multi field type
@@ -378,7 +381,7 @@ var SubSchema = new Schema({
 ```
 
 ### Geo mapping
-Prior to index any geo mapped data (or calling the synchronize), 
+Prior to index any geo mapped data (or calling the synchronize),
 the mapping must be manualy created with the createMapping (see above).
 
 Notice that the name of the field containing the ES geo data must start by
@@ -409,7 +412,7 @@ var geo = new GeoModel({
 
 Mapping, indexing and searching example for geo shape can be found in test/geo-test.js
 
-For example, one can retrieve the list of document where the shape contain a specific 
+For example, one can retrieve the list of document where the shape contain a specific
 point (or polygon...)
 
 ```javascript
@@ -421,7 +424,7 @@ var geoFilter = {
       geo_shape: {
         geo_shape: {
           shape: {
-            type: "point", 
+            type: "point",
             coordinates: [3,1]
           }
         }
@@ -435,11 +438,11 @@ GeoModel.search(geoQuery, {filter: geoFilter}, function(err, res) { /* ... */ })
 Creating the mapping is a one time operation and can be done as
 follows (using the BookSchema as an example):
 
-```javascript 
+```javascript
 var BookSchema = new Schema({
     title: {type:String, es_boost:2.0}
   , author: {type:String, es_null_value:"Unknown Author"}
-  , publicationDate: {type:Date, es_type:'date'} 
+  , publicationDate: {type:Date, es_type:'date'}
 
 BookSchema.plugin(mongoosastic);
 var Book = mongoose.model('Book', BookSchema);
@@ -461,7 +464,7 @@ This feature is still a work in progress. As of this writing you'll have
 to manage whether or not you need to create the mapping, mongoosastic
 will make no assumptions and simply attempt to create the mapping. If
 the mapping already exists, an Exception detailing such will be
-populated in the `err` argument. 
+populated in the `err` argument.
 
 
 ## Queries
@@ -478,7 +481,7 @@ Person.search({
     }
   }
 }, function(err, people){
-   // all the people who fit the age group are here!   
+   // all the people who fit the age group are here!
 });
 
 ```
@@ -525,7 +528,7 @@ User.search({query_string: {query: "john"}}, {hydrate:true, hydrateOptions: {sel
 
 Note using hydrate will be a degree slower as it will perform an Elasticsearch
 query and then do a query against mongodb for all the ids returned from
-the search result. 
+the search result.
 
 You can also default this to always be the case by providing it as a
 plugin option (as well as setting default hydrate options):
