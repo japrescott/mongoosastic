@@ -1,3 +1,94 @@
+4.0.2 2016-02-14
+==========
+
+  * Merge pull request [#170](https://github.com/mongoosastic/mongoosastic/issues/170) from mongoosastic/updated-dependencies
+    updated deps
+  * Merge pull request [#169](https://github.com/mongoosastic/mongoosastic/issues/169) from nschloe/patch-1
+    Update README.md
+
+4.0.0 / 2016-02-13
+==========
+
+  * Merge pull request [#144](https://github.com/mongoosastic/mongoosastic/issues/144) from Alexandre-io/feat/elasticsearch2.x
+    Add support for ElasticSearch 2.x
+
+3.6.1 / 2016-01-30
+==========
+
+  * Merge pull request [#138](https://github.com/mongoosastic/mongoosastic/issues/138) from Bauer-Xcel-Media/master
+    fix: added missing prefix
+  * JasonMore-feature/disable-middlewareHooks. merged [#135](https://github.com/mongoosastic/mongoosastic/issues/135)
+
+3.6.0 / 2015-11-15
+==================
+
+  * 3.6.0
+  * Merge pull request [#132](https://github.com/mongoosastic/mongoosastic/issues/132) from jeresig/add-aggs
+    Add in support for query aggregations
+  * Add in support for aggregations in search queries.
+  * Merge pull request [#131](https://github.com/mongoosastic/mongoosastic/issues/131) from JasonMore/feature/123-documenation
+    Added documentation around issue [#123](https://github.com/mongoosastic/mongoosastic/issues/123)
+  * documentation around issue [#123](https://github.com/mongoosastic/mongoosastic/issues/123)
+
+3.5.0 / 2015-11-12
+==================
+
+  * moved node version to 4.x instead of 4.2
+  * 3.5.0
+  * Merge pull request [#129](https://github.com/mongoosastic/mongoosastic/issues/129) from SamyPesse/feature/custom_mappings
+    Add option "customProperties" to extend mapping
+  * Merge pull request [#130](https://github.com/mongoosastic/mongoosastic/issues/130) from SamyPesse/feature/unindex
+    Unindex when filtered
+  * Merge pull request [#125](https://github.com/mongoosastic/mongoosastic/issues/125) from Alexandre-io/fix-travis-warn
+    Fix eslint warning & Update travis to use the latest services
+  * Unindex when filtered and postSave and fixes [#126](https://github.com/mongoosastic/mongoosastic/issues/126)
+  * Add option "customProperties" to extend mapping
+  * Fix eslint warning & update deps (eslint-config-airbnb, istanbul)
+  * Merge pull request [#127](https://github.com/mongoosastic/mongoosastic/issues/127) from SamyPesse/fix/91
+    Fix [#91](https://github.com/mongoosastic/mongoosastic/issues/91): add option "transform" to transform serialized model before indexation
+  * Use option "transform" to transform the serialized model before indexing
+  * updated CHANGELOG.md
+3.6.0 / 2015-11-15
+==================
+
+  * 3.6.0
+  * Merge pull request [#132](https://github.com/mongoosastic/mongoosastic/issues/132) from jeresig/add-aggs
+    Add in support for query aggregations
+  * Add in support for aggregations in search queries.
+  * Merge pull request [#131](https://github.com/mongoosastic/mongoosastic/issues/131) from JasonMore/feature/123-documenation
+    Added documentation around issue [#123](https://github.com/mongoosastic/mongoosastic/issues/123)
+  * documentation around issue [#123](https://github.com/mongoosastic/mongoosastic/issues/123)
+
+3.5.0 / 2015-11-12
+==================
+
+  * moved node version to 4.x instead of 4.2
+  * 3.5.0
+  * Merge pull request [#129](https://github.com/mongoosastic/mongoosastic/issues/129) from SamyPesse/feature/custom_mappings
+    Add option "customProperties" to extend mapping
+  * Merge pull request [#130](https://github.com/mongoosastic/mongoosastic/issues/130) from SamyPesse/feature/unindex
+    Unindex when filtered
+  * Merge pull request [#125](https://github.com/mongoosastic/mongoosastic/issues/125) from Alexandre-io/fix-travis-warn
+    Fix eslint warning & Update travis to use the latest services
+  * Unindex when filtered and postSave and fixes [#126](https://github.com/mongoosastic/mongoosastic/issues/126)
+  * Add option "customProperties" to extend mapping
+  * Fix eslint warning & update deps (eslint-config-airbnb, istanbul)
+  * Merge pull request [#127](https://github.com/mongoosastic/mongoosastic/issues/127) from SamyPesse/fix/91
+    Fix [#91](https://github.com/mongoosastic/mongoosastic/issues/91): add option "transform" to transform serialized model before indexation
+  * Use option "transform" to transform the serialized model before indexing
+  * updated CHANGELOG.md
+
+3.4.0 / 2015-11-07
+==================
+  * Merge pull request [#120](https://github.com/mongoosastic/mongoosastic/issues/120) from JasonMore/master
+    Recognizes an es_type of nested with es_fields and maps it
+  * added ability to define a nested type
+  * Merge pull request [#122](https://github.com/mongoosastic/mongoosastic/issues/122) from guumaster/updated-travis-coveralls
+    updated yml config for travisci and coveralls
+  * added coverage script
+  * Update README.md
+  * Create .coveralls.yml
+
 3.3.2 / 2015-09-27
 ==================
 
