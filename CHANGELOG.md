@@ -1,3 +1,11 @@
+4.4.1.2 2018-05-17
+==========
+  * rebased with upstream
+
+4.3.2 2017-03-??
+==========
+  * add the ability to use the parentKey to index different documents "together". Thus, we can get all documents in one scoop
+
 4.3.0 2017-02-21
 ==========
   * chore(package): update eslint to version 3.16.0
