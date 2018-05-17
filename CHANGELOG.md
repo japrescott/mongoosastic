@@ -1,3 +1,164 @@
+4.3.0 2017-02-21
+==========
+  * chore(package): update eslint to version 3.16.0
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.8.4
+    https://greenkeeper.io/
+  * chore(package): update async to version 2.1.5
+    https://greenkeeper.io/
+  * chore(package): update eslint-plugin-promise to version 3.4.2
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.8.3
+    https://greenkeeper.io/
+  * chore(package): update standard to version 9.0.0-beta.0 ([#292](https://github.com/mongoosastic/mongoosastic/issues/292))
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.8.2 ([#293](https://github.com/mongoosastic/mongoosastic/issues/293))
+    https://greenkeeper.io/
+  * chore(package): update eslint-plugin-promise to version 3.4.1
+    https://greenkeeper.io/
+  * Fix mapping issue for id.
+    Create mocha test for mapping id
+  * chore(package): update coveralls to version 2.11.16
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.8.1 ([#286](https://github.com/mongoosastic/mongoosastic/issues/286))
+    Closes [#281](https://github.com/mongoosastic/mongoosastic/issues/281)
+    https://greenkeeper.io/
+  * chore(package): update eslint to version 3.15.0 ([#285](https://github.com/mongoosastic/mongoosastic/issues/285))
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.8.0
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.7.9
+    https://greenkeeper.io/
+  * chore(package): update eslint to version 3.14.1 ([#279](https://github.com/mongoosastic/mongoosastic/issues/279))
+    https://greenkeeper.io/
+  * chore(package): update mongoose to version 4.7.7 ([#273](https://github.com/mongoosastic/mongoosastic/issues/273))
+    https://greenkeeper.io/
+  * docs: createMapping should called manualy
+  * chore(package): update eslint to version 3.13.1
+    https://greenkeeper.io/
+  * add test for refresh
+  * update coverage when tests passed; use mocha.opts
+  * fix for stable test results
+
+4.2.4 2017-01-06
+==========
+
+  * chore(package): update eslint to version 3.13.0 ([#267](https://github.com/mongoosastic/mongoosastic/issues/267))
+    https://greenkeeper.io/
+  * chore(package): update dependencies ([#266](https://github.com/mongoosastic/mongoosastic/issues/266))
+    https://greenkeeper.io/
+  * resolve [#95](https://github.com/mongoosastic/mongoosastic/issues/95), support routing on index/unIndex/esSearch. ([#260](https://github.com/mongoosastic/mongoosastic/issues/260))
+    * support routing on index/unIndex/esSearch.
+  * update travis build badge to precise one ([#265](https://github.com/mongoosastic/mongoosastic/issues/265))
+  * support auto index when call Model.insertMany
+  * add co-mocha: write tests with generator function
+  * fix bad request when esCount without query ([#261](https://github.com/mongoosastic/mongoosastic/issues/261))
+  * unIndex should retry when unindex failed ([#259](https://github.com/mongoosastic/mongoosastic/issues/259))
+  * unIndex should retry when unindex failed
+  * should trigger removed event when retry failed
+  * fix [#111](https://github.com/mongoosastic/mongoosastic/issues/111), findOneAndRemove should work fine when no document found ([#258](https://github.com/mongoosastic/mongoosastic/issues/258))
+  * add *.swp to .gitignore
+  * Merge pull request [#257](https://github.com/mongoosastic/mongoosastic/issues/257) from mongoosastic/issue/docs
+    update elasticsearch.org to elastic.co
+  * update elasticsearch.org to elastic.co
+
+4.2.2 2016-12-22
+==========
+
+  * test folder linted ([#247](https://github.com/mongoosastic/mongoosastic/issues/247))
+  * test folder linted
+  * Exclude aggs from being added to the esQuery, as they're already added to the body. Fixes errors with Elasticsearch v5.0.0.
+  * added a catch to the populate promise call in postSave ([#248](https://github.com/mongoosastic/mongoosastic/issues/248))
+  * should keep populated field of source doc unchanged ([#254](https://github.com/mongoosastic/mongoosastic/issues/254))
+  * should keep populated field of source doc unchanged
+  * fix typo
+
+2016-12-12
+==========
+
+  * Fix ([#5](https://github.com/mongoosastic/mongoosastic/issues/5)) mapping creation of nested references ([#252](https://github.com/mongoosastic/mongoosastic/issues/252))
+  * Update mapping-generator.js
+  * Test proving that mongoosastic fails when mapping a geo_point field inside a nested referenced schema
+  * Restoring original mapping-generator.js file
+  * Tests fixed and array of nested referenced object now correctly mapped
+
+
+4.2.1 2016-11-20
+==========
+
+  * update dependencies ([#246](https://github.com/mongoosastic/mongoosastic/issues/246))
+  * eslint updated ([#245](https://github.com/mongoosastic/mongoosastic/issues/245))
+    * eslint updated
+    * dependencies updated & added strict mode
+
+4.1.0 2016-11-17
+==========
+
+  * Fixed: [#207](https://github.com/mongoosastic/mongoosastic/issues/207) Add min_score to search function ([#218](https://github.com/mongoosastic/mongoosastic/issues/218))
+  * Reset bulk to original options.bulk instead of false. Fixes [#161](https://github.com/mongoosastic/mongoosastic/issues/161) ([#237](https://github.com/mongoosastic/mongoosastic/issues/237))
+  * fix a bug where calling doc.index would overwrite all plugin options! ([#187](https://github.com/mongoosastic/mongoosastic/issues/187))
+  * Custom serializer ([#241](https://github.com/mongoosastic/mongoosastic/issues/241))
+    * updated the index method to allow for specifying a custom serialize method
+    * added test for the custom serializer
+    * removed lodash include
+    * fixed a bug/typo in the config.js createModelAndEnsureIndex method
+    * removed debug code from config.js
+  * Eliminate Mongoose Query.prototype.stream() deprecation warning ([#243](https://github.com/mongoosastic/mongoosastic/issues/243))
+    * Eliminate Mongoose deprecation warning for Query.prototype.stream() [#230](https://github.com/mongoosastic/mongoosastic/issues/230)
+    * Add "Matt Audesse <matt@mattaudesse.com>" to AUTHORS
+
+2016-04-17
+==========
+
+  * readme ([#205](https://github.com/mongoosastic/mongoosastic/issues/205))
+    Add unit test for saveOnSynchronize
+    describe only removed
+
+2016-04-15
+==========
+
+  * Fixes [#86](https://github.com/mongoosastic/mongoosastic/issues/86): Callback function in index schema method was not being called with arguments needed for emitter ([#202](https://github.com/mongoosastic/mongoosastic/issues/202))
+  * Hydration preserve ES ordering (if no hydrateOptions.sort is set) ([#194](https://github.com/mongoosastic/mongoosastic/issues/194))
+    * Hydration preserve ES ordering (if no hydrateOptions.sort is set)
+    * Adding tests
+
+2016-04-13
+==========
+
+  * Raw search: providing unwrapped query object. For paging, for example. ([#162](https://github.com/mongoosastic/mongoosastic/issues/162))
+    * es_search function added to mongoosastic.js in order to generalize search query parameter, i.e. add size and from first order parameters
+  * Hydrated results are augmented with the raw ES result: useful for retrieving ES scores ([#163](https://github.com/mongoosastic/mongoosastic/issues/163))
+  * Clone Mongoose tree and path in getCleanTree and mutate the clone ([#197](https://github.com/mongoosastic/mongoosastic/issues/197))
+
+2016-04-12
+==========
+
+  * Synchronise option: decide whether to save or not documents with mongoose before updating ES. ([#200](https://github.com/mongoosastic/mongoosastic/issues/200))
+
+2016-03-03
+==========
+
+  * Merge pull request [#185](https://github.com/mongoosastic/mongoosastic/issues/185) from StickyCube/master
+    :memo: Add documentation for customProperties and unIndex
+
+2016-03-02
+==========
+
+  * :memo: Add documentation for customProperties and unIndex
+
+2016-02-23
+==========
+
+  * Merge pull request [#177](https://github.com/mongoosastic/mongoosastic/issues/177) from jbdemonte/master
+    Fix explicit es_indexed on array. Also close [#178](https://github.com/mongoosastic/mongoosastic/issues/178) and [#179](https://github.com/mongoosastic/mongoosastic/issues/179)
+
+2016-02-18
+==========
+
+  * support for nested schema
+  * Fix explicit es_indexed on array
+
+
 4.0.2 2016-02-14
 ==========
 

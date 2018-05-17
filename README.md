@@ -1,5 +1,5 @@
 # Mongoosastic
-[![Build Status](https://secure.travis-ci.org/mongoosastic/mongoosastic.png?branch=master)](http://travis-ci.org/mongoosastic/mongoosastic)
+[![Build Status](https://travis-ci.org/mongoosastic/mongoosastic.svg?branch=master)](https://travis-ci.org/mongoosastic/mongoosastic)
 [![NPM version](https://img.shields.io/npm/v/mongoosastic.svg)](https://www.npmjs.com/package/mongoosastic)
 [![Coverage Status](https://coveralls.io/repos/mongoosastic/mongoosastic/badge.svg?branch=master&service=github)](https://coveralls.io/github/mongoosastic/mongoosastic?branch=master)
 [![Downloads](https://img.shields.io/npm/dm/mongoosastic.svg)](https://www.npmjs.com/package/mongoosastic)
@@ -10,7 +10,7 @@
 
 This is a fork of Mongoosastic that enables you to pass a 'parentKey' as an option to the mongoosastic plugin so that [parent->children](https://www.elastic.co/guide/en/elasticsearch/guide/current/indexing-parent-child.html) are possible.
 
-Mongoosastic is a [mongoose](http://mongoosejs.com/) plugin that can automatically index your models into [elasticsearch](http://www.elasticsearch.org/).
+Mongoosastic is a [mongoose](http://mongoosejs.com/) plugin that can automatically index your models into [elasticsearch](https://www.elastic.co/).
 
 - [Installation](#installation)
 - [Setup](#setup)
@@ -25,6 +25,9 @@ Mongoosastic is a [mongoose](http://mongoosejs.com/) plugin that can automatical
   - [Indexing on demand](#indexing-on-demand)
   - [Unindexing on demand](#unindexing-on-demand)
   - [Truncating an index](#truncating-an-index)
+  - [Restrictions](#restrictions)
+    - [Auto indexing](#auto-indexing)
+    - [Search immediately after es-indexed event](#search-immediately-after-es-indexed-event)
 - [Mapping](#mapping)
   - [Geo mapping](#geo-mapping)
     - [Indexing a geo point](#indexing-a-geo-point)
@@ -116,7 +119,7 @@ In this case only the name field will be indexed for searching.
 
 Now, by adding the plugin, the model will have a new method called
 `search` which can be used to make simple to complex searches. The `search`
-method accepts [standard Elasticsearch query DSL](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-queries.html)
+method accepts [standard Elasticsearch query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-queries.html)
 
 ```javascript
 User.search({
@@ -212,7 +215,7 @@ var User = new Schema({
 User.plugin(mongoosastic)
 ```
 
-### Elasticsearch [Nested datatype](https://www.elastic.co/guide/en/elasticsearch/reference/2.0/nested.html)
+### Elasticsearch [Nested datatype](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html)
 Since the default in Elasticsearch is to take arrays and flatten them into objects,
 it can make it hard to write queries where you need to maintain the relationships
 between objects in the array, per .
@@ -400,10 +403,26 @@ The static method `esTruncate` will delete all documents from the associated ind
 GarbageModel.esTruncate(function(err){...});
 ```
 
+### Restrictions
+
+#### Auto indexing
+
+Mongoosastic try to auto index documents in favor of mongoose's [middleware](http://mongoosejs.com/docs/middleware.html) feature.
+
+Mongoosastic will auto index when `document.save`/`Model.findOneAndUpdate`/`Model.insertMany`/`document.remove`/`Model.findOneAndRemove`, but not include `Model.remove`/`Model.update`.
+
+And you should have `new: true` options when `findOneAndUpdate` so that mongoosastic can get new values in post hook.
+
+#### Search immediately after es-indexed event
+
+> Elasticsearch by default refreshes each shard every 1s, so the document will be available to search 1s after indexing it.
+
+The event `es-indexed` means that elasticsearch received the index request, and if you want to search the document, please try after 1s. See [Document not found immediately after it is saved ](https://github.com/elastic/elasticsearch-js/issues/231)
+
 ## Mapping
 
 Schemas can be configured to have special options per field. These match
-with the existing [field mapping configurations](http://www.elasticsearch.org/guide/reference/mapping/core-types.html) defined by Elasticsearch with the only difference being they are all prefixed by "es_".
+with the existing [field mapping configurations](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html) defined by Elasticsearch with the only difference being they are all prefixed by "es_".
 
 So for example. If you wanted to index a book model and have the boost
 for title set to 2.0 (giving it greater priority when searching) you'd
@@ -421,7 +440,7 @@ This example uses a few other mapping fields... such as null_value and
 type (which overrides whatever value the schema type is, useful if you
 want stronger typing such as float).
 
-There are various mapping options that can be defined in Elasticsearch. Check out [http://www.elasticsearch.org/guide/reference/mapping/](http://www.elasticsearch.org/guide/reference/mapping/) for more information. Here are examples to the currently possible definitions in mongoosastic:
+There are various mapping options that can be defined in Elasticsearch. Check out [https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) for more information. Here are examples to the currently possible definitions in mongoosastic:
 
 ```javascript
 var ExampleSchema = new Schema({
@@ -556,8 +575,9 @@ GeoModel.search(geoQuery, {filter: geoFilter}, function(err, res) { /* ... */ })
 ```
 
 ### Creating Mappings On Demand
-Creating the mapping is a one time operation and can be done as
-follows (using the BookSchema as an example):
+Creating the mapping is a **one time operation** and **should be called manualy**.
+
+A BookSchema as an example:
 
 ```javascript
 var BookSchema = new Schema({
@@ -606,9 +626,9 @@ Person.search({
 });
 
 ```
-See the Elasticsearch [Query DSL](http://www.elasticsearch.org/guide/reference/query-dsl/) docs for more information.
+See the Elasticsearch [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) docs for more information.
 
-You can also specify query options like [sorts](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-sort.html#search-request-sort)
+You can also specify query options like [sorts](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html#search-request-sort)
 
 ```javascript
 Person.search({/* ... */}, {sort: "age:asc"}, function(err, people){
@@ -632,7 +652,7 @@ Person.search({/* ... */}, {
 });
 ```
 
-Options for queries must adhere to the [javascript elasticsearch driver specs](http://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/api-reference.html#api-search).
+Options for queries must adhere to the [javascript elasticsearch driver specs](https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html#api-search).
 
 ### Raw queries
 A full ElasticSearch query object can be provided to mongoosastic through `.esSearch()` method.
