@@ -2,7 +2,7 @@
   "author": "James R. Carr <james.r.carr@gmail.com> (http://blog.james-carr.org)",
   "name": "mongoosastic",
   "description": "A mongoose plugin that indexes models into elastic search. This is a fork, adding 'parentKey' elastic feature",
-  "version": "4.4.1.2",
+  "version": "4.4.2",
   "tags": [
     "mongodb",
     "elasticsearch",
@@ -16,7 +16,7 @@
   },
   "main": "lib/mongoosastic.js",
   "dependencies": {
-    "elasticsearch": "13.3.0",
+    "elasticsearch": "15.0.0",
     "lodash.clonedeep": "4.5.0"
   },
   "devDependencies": {
@@ -35,7 +35,8 @@
     "standard": "10.0.3"
   },
   "engines": {
-    "node": ">= 4.0"
+    "node": "10.x.x",
+		"npm": "6.x.x"
   },
   "scripts": {
     "authors": "./scripts/update_authors.sh",
