@@ -16,7 +16,7 @@
   },
   "main": "lib/mongoosastic.js",
   "dependencies": {
-    "elasticsearch": "15.0.0",
+    "elasticsearch": "15.1.1",
     "lodash.clonedeep": "4.5.0"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
   },
   "engines": {
     "node": "10.x.x",
-		"npm": "6.x.x"
+    "npm": "6.x.x"
   },
   "scripts": {
     "authors": "./scripts/update_authors.sh",
