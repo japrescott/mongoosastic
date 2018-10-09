@@ -10,31 +10,40 @@
 
 This is a fork of Mongoosastic that enables you to pass a 'parentKey' as an option to the mongoosastic plugin so that [parent->children](https://www.elastic.co/guide/en/elasticsearch/guide/current/indexing-parent-child.html) are possible.
 
+
+
+
+
 Mongoosastic is a [mongoose](http://mongoosejs.com/) plugin that can automatically index your models into [elasticsearch](https://www.elastic.co/).
 
-- [Installation](#installation)
-- [Setup](#setup)
-- [Indexing](#indexing)
-  - [Saving a document](#saving-a-document)
-  - [Removing a document](#removing-a-document)
-  - [Indexing nested models](#indexing-nested-models)
-  - [Indexing mongoose references](#indexing-mongoose-references)
-  - [Indexing an existing collection](#indexing-an-existing-collection)
-  - [Bulk indexing](#bulk-indexing)
-  - [Filtered indexing](#filtered-indexing)
-  - [Indexing on demand](#indexing-on-demand)
-  - [Unindexing on demand](#unindexing-on-demand)
-  - [Truncating an index](#truncating-an-index)
-  - [Restrictions](#restrictions)
-    - [Auto indexing](#auto-indexing)
-    - [Search immediately after es-indexed event](#search-immediately-after-es-indexed-event)
-- [Mapping](#mapping)
-  - [Geo mapping](#geo-mapping)
-    - [Indexing a geo point](#indexing-a-geo-point)
-    - [Indexing a geo shape](#indexing-a-geo-shape)
-  - [Creating mappings on-demand](#creating-mappings-on-demand)
-- [Queries](#queries)
-  - [Hydration](#hydration)
+- [Mongoosastic](#mongoosastic)
+  - [Installation](#installation)
+  - [Setup](#setup)
+    - [Model.plugin(mongoosastic, options)](#modelpluginmongoosastic--options)
+  - [Parent->Children relationship](#parent-children-relationship)
+  - [Indexing](#indexing)
+    - [Saving a document](#saving-a-document)
+    - [Removing a document](#removing-a-document)
+    - [Indexing Nested Models](#indexing-nested-models)
+    - [Elasticsearch Nested datatype](#elasticsearch-nested-datatype)
+    - [Indexing Mongoose References](#indexing-mongoose-references)
+    - [Indexing An Existing Collection](#indexing-an-existing-collection)
+    - [Bulk Indexing](#bulk-indexing)
+    - [Filtered Indexing](#filtered-indexing)
+    - [Indexing On Demand](#indexing-on-demand)
+    - [Unindexing on demand](#unindexing-on-demand)
+    - [Truncating an index](#truncating-an-index)
+    - [Restrictions](#restrictions)
+      - [Auto indexing](#auto-indexing)
+      - [Search immediately after es-indexed event](#search-immediately-after-es-indexed-event)
+  - [Mapping](#mapping)
+    - [Geo mapping](#geo-mapping)
+      - [Indexing a geo point](#indexing-a-geo-point)
+      - [Indexing a geo shape](#indexing-a-geo-shape)
+    - [Creating Mappings On Demand](#creating-mappings-on-demand)
+  - [Queries](#queries)
+    - [Raw queries](#raw-queries)
+    - [Hydration](#hydration)
 
 ## Installation
 
@@ -75,6 +84,7 @@ Options are:
 * `indexAutomatically` - allows indexing after model save to be disabled for when you need finer control over when documents are indexed. Defaults to true
 * `customProperties` - an object detailing additional properties which will be merged onto the type's default mapping when `createMapping` is called.
 * `saveOnSynchronize` - triggers Mongoose save (and pre-save) method when synchronizing a collection/index. Defaults to true
+* `parentKey` - the field that is used to relate [parent->children](https://www.elastic.co/guide/en/elasticsearch/guide/current/indexing-parent-child.html)
 
 
 To have a model indexed into Elasticsearch simply add the plugin.
@@ -98,6 +108,7 @@ while using the model name itself as the type. So if you create a new
 User object and save it, you can see it by navigating to
 http://localhost:9200/users/user/_search (this assumes Elasticsearch is
 running locally on port 9200).
+
 
 The default behavior is all fields get indexed into Elasticsearch. This can be a little wasteful especially considering that
 the document is now just being duplicated between mongodb and
@@ -150,6 +161,32 @@ var esClient = new elasticsearch.Client({host: 'localhost:9200'});
 MyModel.plugin(mongoosastic, {
   esClient: esClient
 })
+```
+
+
+## Parent->Children relationship
+
+To have a [parent->children](https://www.elastic.co/guide/en/elasticsearch/guide/current/indexing-parent-child.html) relationship indexed into Elasticsearch simply add the parentKey to the options
+
+```javascript
+const mongoose     = require('mongoose')
+  , mongoosastic = require('mongoosastic')
+  , Schema       = mongoose.Schema
+
+const Parent = new Schema({
+    name: String
+});
+const Child = new Schema({
+    name: String
+  , parent: Schema.Types.ObjectId
+});
+
+User.plugin(
+    mongoosastic,
+    {
+      parentKey: 'parent'
+    }
+)
 ```
 
 
