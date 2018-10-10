@@ -3,5 +3,8 @@
     "node": true,
     "mocha": true
   },
-  "extends": "standard"
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "extends": "eslint:recommended"
 }
