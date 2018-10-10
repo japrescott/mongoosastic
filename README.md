@@ -1,9 +1,9 @@
 # Mongoosastic
-[![Build Status](https://travis-ci.org/mongoosastic/mongoosastic.svg?branch=master)](https://travis-ci.org/mongoosastic/mongoosastic)
+[![Build Status](https://travis-ci.org/japrescott/mongoosastic.svg?branch=master)](https://travis-ci.org/japrescott/mongoosastic)
 [![NPM version](https://img.shields.io/npm/v/mongoosastic.svg)](https://www.npmjs.com/package/mongoosastic)
-[![Coverage Status](https://coveralls.io/repos/mongoosastic/mongoosastic/badge.svg?branch=master&service=github)](https://coveralls.io/github/mongoosastic/mongoosastic?branch=master)
+[![Coverage Status](https://coveralls.io/repos/japrescott/mongoosastic/badge.svg?branch=master&service=github)](https://coveralls.io/github/japrescott/mongoosastic?branch=master)
 [![Downloads](https://img.shields.io/npm/dm/mongoosastic.svg)](https://www.npmjs.com/package/mongoosastic)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mongoosastic/mongoosastic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/japrescott/mongoosastic?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 [![NPM](https://nodei.co/npm/mongoosastic.png)](https://nodei.co/npm/mongoosastic/)
 

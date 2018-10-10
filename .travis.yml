@@ -3,11 +3,10 @@ sudo: false
 language: node_js
 
 node_js:
-  - 4
-  - stable
+  - "node"
 
 before_install:
-  - npm i -g npm@"^3.0.0"
+  - npm i -g npm@"^5.0.0"
 
 services:
   - mongodb
