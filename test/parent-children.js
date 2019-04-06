@@ -104,6 +104,9 @@ describe('Parent->Children', function () {
           query: 'Commercial'
         }
       }, function (err, res) {
+
+        console.log("Search Returned answer", err, res);
+
         res.hits.total.should.eql(1)
         res.hits.hits.forEach(function (node) {
           ['Parent'].should.containEql(node._source.name)
