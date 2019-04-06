@@ -46,6 +46,7 @@ function createModelAndSave (Model, obj, cb) {
 }
 
 function saveAndWaitIndex (model, cb) {
+  console.log("Save and Index Model", model);
   model.save(function (err) {
     if (err) cb(err)
     else {
