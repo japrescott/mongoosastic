@@ -43,8 +43,8 @@
     "lint": "eslint lib test",
     "mocha": "mocha test/*-test.js",
     "mocha_parent": "mocha test/parent-children-test.js",
-    "test": "npm run lint && istanbul cover _mocha --report lcovonly -- test/*-test.js",
-    "test_parent": "npm run lint && istanbul cover _mocha --report lcovonly -- test/parent-children-test.js",
+    "test_": "npm run lint && istanbul cover _mocha --report lcovonly -- test/*-test.js",
+    "test": "npm run lint && istanbul cover _mocha --report lcovonly -- test/parent-children-test.js",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "changelog": "changelog japrescott/mongoosastic latest -m"
   },

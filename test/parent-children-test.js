@@ -59,7 +59,7 @@ describe('Parent->Children', function () {
   before(function (done) {
     mongoose.connect(config.mongoUrl, function () {
       Parent.remove(function () {
-        config.deleteIndexIfExists(['parents'], function () {
+        config.deleteIndexIfExists(['nodes'], function () {
           const par = new Parent({
             name: 'Parent',
             category: 'A',
@@ -82,7 +82,8 @@ describe('Parent->Children', function () {
               order: 3
             })
           ]
-          async.forEach(rels, config.saveAndWaitIndex, function () {
+          async.forEach( [par].concat(rels), config.saveAndWaitIndex, function (err) {
+            console.log('saved and indexes all parent-> children documents', err)
             setTimeout(done, config.INDEXING_TIMEOUT)
           })
         })
@@ -92,7 +93,9 @@ describe('Parent->Children', function () {
 
   after(function (done) {
     Parent.remove()
+    Child.remove()
     Parent.esClient.close()
+    Child.esClient.close()
     mongoose.disconnect()
     done()
   })
