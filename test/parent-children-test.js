@@ -25,9 +25,9 @@ ParentSchema.plugin(
     hydrate: true,
     join: {
       name: 'parentchild',
-      self: 'parentttt',
+      self: 'parent',
       relations: {
-        'parentttt':'childddd'
+        'parent':'child'
       }
     }
   }
@@ -56,10 +56,10 @@ ChildSchema.plugin(
     hydrate: true,
     join: {
       name: 'parentchild',
-      self: 'childddd',
+      self: 'child',
       parentField: 'parent_id',
       relations: {
-        'parentttt':'childddd'
+        'parent':'child'
       }
     }
   }
@@ -158,15 +158,15 @@ describe('Parent->Children', function () {
         // simple_query_string: {
         //   query: 'Commercial'
         // }
-        "has_child" : {
-          "type" : "childddd",
-          "score_mode" : "avg",
-          "query" : {
+        has_child: {
+          type: "child",
+          score_mode: "avg",
+          query: {
             query_string:{
               query: 'Commercial'
             }
           }
-      }
+        }
       }, function (err, res) {
 
         console.log("Search Returned answer", err, JSON.stringify(res, null, 4) );
