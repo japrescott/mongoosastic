@@ -84,7 +84,7 @@ describe('Parent->Children', function () {
               order: 3
             })
           ]
-          async.forEach( rels, config.createModelAndEnsureIndex, function (err) {
+          async.eachSeries( rels, config.saveAndWaitIndex, function (err) {
             console.log('saved and indexes all parent-> children documents', err)
             setTimeout(done, config.INDEXING_TIMEOUT)
           })
