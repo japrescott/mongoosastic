@@ -106,6 +106,43 @@ describe('Parent->Children', function () {
   })
 
   describe('Search', function () {
+
+    it('find parent node', function (done) {
+      Parent.search({
+        query_string: {
+          query: 'Parent'
+        }
+      }, function (err, res) {
+
+        console.log("Search Returned answer", err, res);
+
+        res.hits.total.should.eql(1)
+        // res.hits.hits.forEach(function (node) {
+        //   ['Parent'].should.containEql(node._source.name)
+        // })
+
+        done()
+      })
+    });
+
+    it('find child node', function (done) {
+      Child.search({
+        query_string: {
+          query: 'Commercial'
+        }
+      }, function (err, res) {
+
+        console.log("Search Returned answer", err, res);
+
+        res.hits.total.should.eql(1)
+        // res.hits.hits.forEach(function (node) {
+        //   ['Parent'].should.containEql(node._source.name)
+        // })
+
+        done()
+      })
+    });
+
     it('if we find a parent node, we should get all children back as well', function (done) {
       Parent.search({
         query_string: {
@@ -122,6 +159,8 @@ describe('Parent->Children', function () {
 
         done()
       })
-    })
+    });
+
+
   })
 })
