@@ -11,7 +11,7 @@ const mongoosastic = require('../lib/mongoosastic')
 
 const ParentSchema = new Schema({
   name: { type: String, es_indexed: true },
-  category: String
+  category: { type: String, es_indexed: true },
 })
 ParentSchema.plugin(
   mongoosastic,
@@ -32,11 +32,12 @@ ParentSchema.plugin(
 const ChildSchema = new Schema({
   parent_id: {
     type: Schema.Types.ObjectId,
+    es_indexed: true
     // es_join_name: 'child',
     // es_join_isParentLink: true,
   },
   name: { type: String, es_indexed: true },
-  order: Number
+  order: { type: Number, es_indexed: true },
 })
 ChildSchema.plugin(
   mongoosastic,
@@ -59,6 +60,7 @@ const Child = mongoose.model('Child', ChildSchema)
 
 describe('Parent->Children', function () {
   before(function (done) {
+    console.log("Before: making all documents..");
     mongoose.connect(config.mongoUrl, function () {
       Parent.remove(function () {
         config.deleteIndexIfExists(['nodes'], function () {
@@ -84,8 +86,9 @@ describe('Parent->Children', function () {
               order: 3
             })
           ]
+          console.log("Before: created documents, saving..");
           async.eachSeries( rels, config.saveAndWaitIndex, function (err) {
-            console.log('saved and indexes all parent-> children documents', err)
+            console.log('Before: saved and indexes all parent-> children documents', err)
             setTimeout(done, config.INDEXING_TIMEOUT)
           })
         })
@@ -94,8 +97,8 @@ describe('Parent->Children', function () {
   })
 
   after(function (done) {
-    Parent.remove()
-    Child.remove()
+    Parent.deleteMany()
+    Child.deleteMany()
     Parent.esClient.close()
     Child.esClient.close()
     mongoose.disconnect()
