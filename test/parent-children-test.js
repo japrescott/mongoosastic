@@ -162,10 +162,12 @@ describe('Parent->Children', function () {
           type: "child",
           score_mode: "avg",
           query: {
-            query_string:{
-              query: 'Commercial'
-            }
-          }
+            "match_all": {}
+            // query_string:{
+            //   query: 'Commercial'
+            // }
+          },
+          "inner_hits": {}
         }
       }, function (err, res) {
 

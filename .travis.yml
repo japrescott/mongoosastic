@@ -6,11 +6,12 @@ node_js:
   - "node"
 
 before_install:
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.0.deb && sudo dpkg -i --force-confnew elasticsearch-6.6.0.deb && sudo service elasticsearch start
   - npm i -g npm@"^6.4.0"
 
 services:
   - mongodb
-  - elasticsearch
+#  - elasticsearch
 
 env:
   - BULK_ACTION_TIMEOUT=30000 INDEXING_TIMEOUT=3000 CXX=g++-4.8
