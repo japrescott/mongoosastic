@@ -10,13 +10,14 @@ const mongoosastic = require('../lib/mongoosastic')
 
 
 const ParentSchema = new Schema({
-  name: String,
+  name: { type: String, es_indexed: true },
   category: String
 })
 ParentSchema.plugin(
   mongoosastic,
   {
     index: 'nodes',
+    hydrate: true,
     join: {
       name: 'parentchild',
       self: 'parent',
@@ -34,13 +35,14 @@ const ChildSchema = new Schema({
     // es_join_name: 'child',
     // es_join_isParentLink: true,
   },
-  name: String,
+  name: { type: String, es_indexed: true },
   order: Number
 })
 ChildSchema.plugin(
   mongoosastic,
   {
     index: 'nodes',
+    hydrate: true,
     join: {
       name: 'parentchild',
       self: 'child',
@@ -82,7 +84,7 @@ describe('Parent->Children', function () {
               order: 3
             })
           ]
-          async.forEach( [par].concat(rels), config.saveAndWaitIndex, function (err) {
+          async.forEach( rels, config.createModelAndEnsureIndex, function (err) {
             console.log('saved and indexes all parent-> children documents', err)
             setTimeout(done, config.INDEXING_TIMEOUT)
           })
