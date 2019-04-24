@@ -155,9 +155,18 @@ describe('Parent->Children', function () {
 
     it('if we find a parent node, we should get all children back as well', function (done) {
       Parent.search({
-        query_string: {
-          query: 'Commercial'
-        }
+        // simple_query_string: {
+        //   query: 'Commercial'
+        // }
+        "has_child" : {
+          "type" : "childddd",
+          "score_mode" : "avg",
+          "query" : {
+            query_string:{
+              query: 'Commercial'
+            }
+          }
+      }
       }, function (err, res) {
 
         console.log("Search Returned answer", err, JSON.stringify(res, null, 4) );
