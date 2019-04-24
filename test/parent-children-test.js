@@ -9,10 +9,15 @@ const mongoosastic = require('../lib/mongoosastic')
 
 
 
-const ParentSchema = new Schema({
-  name: { type: String, es_indexed: true },
-  category: { type: String, es_indexed: true },
-})
+const ParentSchema = new Schema(
+  {
+    name: { type: String, es_indexed: true },
+    category: { type: String, es_indexed: true },
+  },
+  {
+    collection:"nodes"
+  }
+)
 ParentSchema.plugin(
   mongoosastic,
   {
@@ -29,16 +34,21 @@ ParentSchema.plugin(
 )
 
 
-const ChildSchema = new Schema({
-  parent_id: {
-    type: Schema.Types.ObjectId,
-    es_indexed: true
-    // es_join_name: 'child',
-    // es_join_isParentLink: true,
+const ChildSchema = new Schema(
+  {
+    parent_id: {
+      type: Schema.Types.ObjectId,
+      es_indexed: true
+      // es_join_name: 'child',
+      // es_join_isParentLink: true,
+    },
+    name: { type: String, es_indexed: true },
+    order: { type: Number, es_indexed: true },
   },
-  name: { type: String, es_indexed: true },
-  order: { type: Number, es_indexed: true },
-})
+  {
+    collection:"nodes"
+  }
+)
 ChildSchema.plugin(
   mongoosastic,
   {
@@ -114,7 +124,7 @@ describe('Parent->Children', function () {
         }
       }, function (err, res) {
 
-        console.log("Search Returned answer", err, res);
+        console.log("Search Returned answer", err, JSON.stringify(res, null, 4) );
 
         res.hits.total.should.eql(1)
         // res.hits.hits.forEach(function (node) {
@@ -132,7 +142,7 @@ describe('Parent->Children', function () {
         }
       }, function (err, res) {
 
-        console.log("Search Returned answer", err, res);
+        console.log("Search Returned answer", err, JSON.stringify(res, null, 4) );
 
         res.hits.total.should.eql(1)
         // res.hits.hits.forEach(function (node) {
@@ -150,7 +160,7 @@ describe('Parent->Children', function () {
         }
       }, function (err, res) {
 
-        console.log("Search Returned answer", err, res);
+        console.log("Search Returned answer", err, JSON.stringify(res, null, 4) );
 
         res.hits.total.should.eql(1)
         res.hits.hits.forEach(function (node) {
