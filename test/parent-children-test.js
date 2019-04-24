@@ -25,9 +25,9 @@ ParentSchema.plugin(
     hydrate: true,
     join: {
       name: 'parentchild',
-      self: 'parent',
+      self: 'parentttt',
       relations: {
-        'parent':'child'
+        'parentttt':'childddd'
       }
     }
   }
@@ -56,10 +56,10 @@ ChildSchema.plugin(
     hydrate: true,
     join: {
       name: 'parentchild',
-      self: 'child',
+      self: 'childddd',
       parentField: 'parent_id',
       relations: {
-        'parent':'child'
+        'parentttt':'childddd'
       }
     }
   }
