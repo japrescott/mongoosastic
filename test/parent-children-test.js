@@ -76,6 +76,7 @@ describe('Parent->Children', function () {
         config.deleteIndexIfExists(['nodes'], function () {
           Parent.createMapping(() => {
             //Child.createMapping(() => {
+              
                 
               const par = new Parent({
                 name: 'Parent',
