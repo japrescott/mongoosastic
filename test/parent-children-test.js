@@ -74,32 +74,37 @@ describe('Parent->Children', function () {
     mongoose.connect(config.mongoUrl, function () {
       Parent.remove(function () {
         config.deleteIndexIfExists(['nodes'], function () {
-          const par = new Parent({
-            name: 'Parent',
-            category: 'A',
-          });
-          const rels = [
-            par,
-            new Child({
-              'parent_id':par._id,
-              name: 'Commercial',
-              order: 1
-            }),
-            new Child({
-              'parent_id':par._id,
-              name: 'Construction',
-              order: 5
-            }),
-            new Child({
-              'parent_id':par._id,
-              name: 'Legal',
-              order: 3
+          Parent.createMapping(() => {
+            Child.createMapping(() => {
+                
+              const par = new Parent({
+                name: 'Parent',
+                category: 'A',
+              });
+              const rels = [
+                par,
+                new Child({
+                  'parent_id':par._id,
+                  name: 'Commercial',
+                  order: 1
+                }),
+                new Child({
+                  'parent_id':par._id,
+                  name: 'Construction',
+                  order: 5
+                }),
+                new Child({
+                  'parent_id':par._id,
+                  name: 'Legal',
+                  order: 3
+                })
+              ]
+              console.log("Before: created documents, saving..");
+              async.eachSeries( rels, config.saveAndWaitIndex, function (err) {
+                console.log('Before: saved and indexes all parent-> children documents', err)
+                setTimeout(done, config.INDEXING_TIMEOUT)
+              })
             })
-          ]
-          console.log("Before: created documents, saving..");
-          async.eachSeries( rels, config.saveAndWaitIndex, function (err) {
-            console.log('Before: saved and indexes all parent-> children documents', err)
-            setTimeout(done, config.INDEXING_TIMEOUT)
           })
         })
       })
