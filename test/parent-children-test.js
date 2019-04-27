@@ -74,8 +74,8 @@ describe('Parent->Children', function () {
     mongoose.connect(config.mongoUrl, function () {
       Parent.remove(function () {
         config.deleteIndexIfExists(['nodes'], function () {
-          //Parent.createMapping(() => {
-            //Child.createMapping(() => {
+          Parent.createMapping(() => {
+            Child.createMapping(() => {
               
                 
               const par = new Parent({
@@ -105,8 +105,8 @@ describe('Parent->Children', function () {
                 console.log('Before: saved and indexes all parent-> children documents', err)
                 setTimeout(done, config.INDEXING_TIMEOUT)
               })
-            //})
-          //})
+            })
+          })
         })
       })
     })
