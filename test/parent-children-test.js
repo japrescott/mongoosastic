@@ -57,7 +57,6 @@ ChildSchema.plugin(
     type: 'nodes',
     hydrate: true,
     routing: (elem) => {
-      console.log('Routing child to its parent..', arguments);
       return elem['parent_id'];
     },
     join: {
