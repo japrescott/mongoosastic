@@ -74,7 +74,7 @@ describe('Parent->Children', function () {
     mongoose.connect(config.mongoUrl, function () {
       Parent.remove(function () {
         config.deleteIndexIfExists(['nodes'], function () {
-          Parent.createMapping(() => {
+          //Parent.createMapping(() => {
             //Child.createMapping(() => {
               
                 
@@ -106,7 +106,7 @@ describe('Parent->Children', function () {
                 setTimeout(done, config.INDEXING_TIMEOUT)
               })
             //})
-          })
+          //})
         })
       })
     })
