@@ -56,9 +56,9 @@ ChildSchema.plugin(
     index: 'nodes',
     type: 'nodes',
     hydrate: true,
-    routing: (elem) => {
-      return elem['parent_id'];
-    },
+    // routing: (elem) => {
+    //   return elem['parent_id'];
+    // },
     join: {
       name: 'parentchild',
       self: 'child',
