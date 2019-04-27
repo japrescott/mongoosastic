@@ -73,9 +73,12 @@ describe('Parent->Children', function () {
     console.log("Before: making all documents..");
     mongoose.connect(config.mongoUrl, function () {
       Parent.remove(function () {
-        config.deleteIndexIfExists(['nodes'], function () {
-          Parent.createMapping(() => {
-            Child.createMapping(() => {
+        config.deleteIndexIfExists(['nodes'], function (err) {
+          console.log("Before: deleteIndex...", err);
+          Parent.createMapping((err) => {
+            console.log("Before: createdMapping for Parent...", err);
+            Child.createMapping((err) => {
+              console.log("Before: createdMapping for Child...", err);
               
                 
               const par = new Parent({
