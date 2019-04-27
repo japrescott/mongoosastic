@@ -17,6 +17,7 @@
   "main": "lib/mongoosastic.js",
   "dependencies": {
     "@elastic/elasticsearch": "^6.7.0-rc.2",
+    "elasticsearch": "15.4.1",
     "lodash.clonedeep": "4.5.0"
   },
   "devDependencies": {
