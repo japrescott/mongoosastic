@@ -80,10 +80,10 @@ describe('Parent->Children', function () {
       Parent.remove(function () {
         config.deleteIndexIfExists(['nodes'], function (err) {
           console.log("Before: deleteIndex...", err);
-          Parent.createMapping((err) => {
-            console.log("Before: createdMapping for Parent...", err);
-            Child.createMapping((err) => {
-              console.log("Before: createdMapping for Child...", err);
+          // Parent.createMapping((err) => {
+          //   console.log("Before: createdMapping for Parent...", err);
+          //   Child.createMapping((err) => {
+          //     console.log("Before: createdMapping for Child...", err);
               
                 
               const par = new Parent({
@@ -113,8 +113,8 @@ describe('Parent->Children', function () {
                 console.log('Before: saved and indexes all parent-> children documents', err)
                 setTimeout(done, config.INDEXING_TIMEOUT)
               })
-            })
-          })
+          //   })
+          // })
         })
       })
     })
