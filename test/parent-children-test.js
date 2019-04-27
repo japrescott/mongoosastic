@@ -22,6 +22,7 @@ ParentSchema.plugin(
   mongoosastic,
   {
     index: 'nodes',
+    type: 'nodes',
     hydrate: true,
     join: {
       name: 'parentchild',
@@ -53,9 +54,10 @@ ChildSchema.plugin(
   mongoosastic,
   {
     index: 'nodes',
+    type: 'nodes',
     hydrate: true,
     routing: (elem) => {
-      console.log('Routing child to its parent..', elem);
+      console.log('Routing child to its parent..', arguments);
       return elem['parent_id'];
     },
     join: {
