@@ -11,6 +11,12 @@ const mongoosastic = require('../lib/mongoosastic')
 
 const ParentSchema = new Schema(
   {
+    parent_id: {
+      type: Schema.Types.ObjectId,
+      es_indexed: true
+      // es_join_name: 'child',
+      // es_join_isParentLink: true,
+    },
     name: { type: String, es_indexed: true },
     category: { type: String, es_indexed: true },
   },
@@ -87,6 +93,7 @@ describe('Parent->Children', function () {
               
                 
               const par = new Parent({
+                'parent_id':null,
                 name: 'Parent',
                 category: 'A',
               });
